@@ -1,0 +1,74 @@
+package com.example.crm.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+
+@Entity
+public final class Contact extends AbstractEntity {
+
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    @JsonIgnoreProperties({ "employees" })
+    private Company company;
+
+    @NotNull
+    @ManyToOne
+    private Status status;
+
+    @Email
+    @NotEmpty
+    private String email = "";
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
